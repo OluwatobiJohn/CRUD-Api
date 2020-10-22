@@ -6,12 +6,13 @@ require('dotenv/config');
 
 
 //MiddleWares
-app.use(bodyParser.urlencoded({ extended: true}));
+app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 
 // Import Routes
 const notesRoute = require('./routes/notes');
 app.use('/notes', notesRoute)
+
 // Home Route 
 app.get('/', (req, res) => {
     res.send('This is the Homepage');

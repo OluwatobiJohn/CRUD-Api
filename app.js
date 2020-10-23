@@ -9,6 +9,7 @@ require('dotenv/config');
 app.use(bodyParser.urlencoded({ extended: false}));
 app.use(bodyParser.json());
 
+
 // Import Routes
 const notesRoute = require('./routes/notes');
 app.use('/notes', notesRoute)

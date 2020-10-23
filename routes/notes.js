@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Post = require('../models/Post');
-
+const { body, validationResult } = require('express-validator');
 //ROUTES
 
 //All Notes
@@ -15,7 +15,15 @@ router.get('/', async (req, res) => {
 });
 
 //Post Note
-router.post('/', async (req, res) => {
+router.post('/', [
+    body('title').isLength({ min: 5, max: 30}),
+    body('description').isLength({ min: 20, max: 70})
+] , async (req, res) => {
+    const errors = validationResult(req);
+    
+    if (!errors.isEmpty()){
+        return res.status(400).json({ errors: errors.array() });
+    };
     const note = new Post ({
         title: req.body.title,
         description: req.body.description

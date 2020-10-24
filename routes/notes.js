@@ -16,8 +16,8 @@ router.get('/', async (req, res) => {
 
 //Post Note
 router.post('/', [
-    body('title').isLength({ min: 5, max: 30}),
-    body('description').isLength({ min: 20, max: 70})
+    body('title').isLength({ min: 5, max: 30}).withMessage('input must be between 5-30 characters'),
+    body('description').isLength({ min: 20, max: 70}).withMessage('input must be between 20 - 70 characters')
 ] , async (req, res) => {
     const errors = validationResult(req);
     
